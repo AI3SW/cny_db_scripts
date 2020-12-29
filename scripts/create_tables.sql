@@ -23,7 +23,7 @@ CREATE TABLE public."device" (
 	PRIMARY KEY (device_id)
 );
 
-CREATE INDEX ix_last_play_time ON public.device USING btree (last_smile_time);
+CREATE INDEX ix_last_play_time ON public.device USING btree (last_play_time);
 CREATE INDEX ix_device_start_time ON public.device USING btree (start_time);
 
 

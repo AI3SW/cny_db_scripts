@@ -19,7 +19,7 @@ $ PGPASSWORD=password psql -U postgres -h localhost -f scripts/create_db.sql
 $ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f scripts/create_tables.sql
 ```
 
-### 2. Using interactive shell of the container
+### 2. Using interactive shell into the container
 
 ```bash
 $ docker exec -it postgres /bin/bash

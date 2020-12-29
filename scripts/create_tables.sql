@@ -8,10 +8,10 @@ DROP TABLE IF EXISTS public."app";
 -- public.app definition
 
 CREATE TABLE public."app" (
-	app_id SERIAL NOT NULL, 
-	model_name VARCHAR NOT NULL, 
-	model_desc VARCHAR, 
-	PRIMARY KEY (model_id)
+	app_id SERIAL NOT NULL,
+	app_name VARCHAR NOT NULL,
+	app_desc VARCHAR,
+	PRIMARY KEY (app_id)
 );
 
 -- public.device definition

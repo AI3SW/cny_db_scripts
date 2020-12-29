@@ -1,11 +1,8 @@
 -- drop tables 
-DROP TABLE IF EXISTS public.classification;
-DROP TABLE IF EXISTS public.regression;
+DROP TABLE IF EXISTS public."asr_prediction";
 DROP TABLE IF EXISTS public."session";
-DROP TABLE IF EXISTS public.device;
-DROP TABLE IF EXISTS public.research_entity;
-DROP TABLE IF EXISTS public."label";
-DROP TABLE IF EXISTS public.model;
+DROP TABLE IF EXISTS public."device";
+DROP TABLE IF EXISTS public."app";
 
 
 -- public.app definition

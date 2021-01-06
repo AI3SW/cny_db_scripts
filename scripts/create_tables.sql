@@ -33,7 +33,7 @@ CREATE TABLE public."device" (
 	PRIMARY KEY (device_id)
 );
 
-CREATE INDEX ix_last_play_time ON public.device USING btree (last_play_time);
+CREATE INDEX ix_device_last_play_time ON public.device USING btree (last_play_time);
 
 CREATE INDEX ix_device_start_time ON public.device USING btree (start_time);
 
@@ -75,6 +75,9 @@ CREATE INDEX ix_asr_audio_stream_info_user_id ON public.asr_audio_stream_info US
 CREATE INDEX ix_asr_audio_stream_info_app_id ON public.asr_audio_stream_info USING btree (app_id);
 
 CREATE INDEX ix_asr_audio_stream_info_proc_start_time ON public.asr_audio_stream_info USING btree (proc_start_time);
+
+CREATE INDEX ix_asr_audio_stream_info_proc_end_time ON public.asr_audio_stream_info USING btree (proc_end_time);
+
 
 -- public.asr_audio_stream_prediction definition
 CREATE TABLE public."asr_audio_stream_prediction" (

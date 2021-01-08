@@ -10,7 +10,7 @@ $ docker run --rm -p 5432:5432 --name postgres \
 $ docker stop postgres
 ```
 
-## Create Database and Tables
+## Create Database, Tables and Stored Procedures
 
 ### 1. Using `psql`
 
@@ -18,6 +18,8 @@ $ docker stop postgres
 $ PGPASSWORD=password psql -U postgres -h localhost -f scripts/create_db.sql
 $ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/create_tables.sql
 $ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f scripts/create_tables.sql
+$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/create_procedures.sql
+$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f scripts/create_procedures.sql
 ```
 
 ### 2. Using interactive shell into the container
@@ -29,10 +31,12 @@ root@container:/$ git clone https://github.com/kw01sg/ai_toolbox_db.git
 root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -f ai_toolbox_db/scripts/create_db.sql
 root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f ai_toolbox_db/scripts/create_tables.sql
 root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f ai_toolbox_db/scripts/create_tables.sql
+root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f ai_toolbox_db/scripts/create_procedures.sql
+root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f ai_toolbox_db/scripts/scripts/create_procedures.sql
 ```
 
 ## Seed Staging Database
 
 ```bash
-$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f ai_toolbox_db/scripts/seed_mock_data.sql
+$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/seed_mock_data.sql
 ```

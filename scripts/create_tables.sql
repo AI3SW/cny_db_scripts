@@ -78,7 +78,6 @@ CREATE INDEX ix_asr_audio_stream_info_proc_start_time ON public.asr_audio_stream
 
 CREATE INDEX ix_asr_audio_stream_info_proc_end_time ON public.asr_audio_stream_info USING btree (proc_end_time);
 
-
 -- public.asr_audio_stream_prediction definition
 CREATE TABLE public."asr_audio_stream_prediction" (
 	user_id INTEGER NOT NULL,

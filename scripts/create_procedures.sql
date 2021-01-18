@@ -38,6 +38,43 @@ AS $$
 $$;
 
 
+CREATE OR REPLACE PROCEDURE insert_audio_stream_info(
+    user_id INTEGER,
+    device_id VARCHAR(64),
+    session_id VARCHAR,
+    seq_id INTEGER,
+    app_id INTEGER,
+    proc_start_time TIMESTAMP WITH TIME ZONE,
+    proc_end_time TIMESTAMP WITH TIME ZONE,
+    stream_duration BIGINT
+)
+LANGUAGE SQL
+AS $$
+    INSERT INTO
+        public."asr_audio_stream_info" (
+            user_id,
+            device_id,
+            session_id,
+            seq_id,
+            app_id,
+            proc_start_time,
+            proc_end_time,
+            stream_duration
+        )
+    VALUES
+        (
+            user_id,
+            device_id,
+            session_id,
+            seq_id,
+            app_id,
+            proc_start_time,
+            proc_end_time,
+            stream_duration
+        );
+$$;
+
+
 CREATE OR REPLACE PROCEDURE update_audio_stream_prediction(
     session_id VARCHAR,
     seq_id INTEGER,
@@ -61,4 +98,28 @@ AS $$
         return_text = COALESCE(update_audio_stream_prediction.return_text, public."asr_audio_stream_prediction".return_text)
 WHERE public."asr_audio_stream_prediction".session_id = update_audio_stream_prediction.session_id
     AND public."asr_audio_stream_prediction".seq_id = update_audio_stream_prediction.seq_id;
+$$;
+
+
+CREATE OR REPLACE PROCEDURE update_audio_stream_info(
+    user_id INTEGER,
+    device_id VARCHAR(64),
+    session_id VARCHAR,
+    seq_id INTEGER,
+    app_id INTEGER,
+    proc_start_time TIMESTAMP WITH TIME ZONE,
+    proc_end_time TIMESTAMP WITH TIME ZONE,
+    stream_duration BIGINT
+)
+LANGUAGE SQL
+AS $$
+    UPDATE public."asr_audio_stream_info"
+    SET user_id = COALESCE(update_audio_stream_info.user_id, public."asr_audio_stream_info".user_id),
+        device_id = COALESCE(update_audio_stream_info.device_id, public."asr_audio_stream_info".device_id),
+        app_id = COALESCE(update_audio_stream_info.app_id, public."asr_audio_stream_info".app_id),
+        proc_start_time = COALESCE(update_audio_stream_info.proc_start_time, public."asr_audio_stream_info".proc_start_time),
+        proc_end_time = COALESCE(update_audio_stream_info.proc_end_time, public."asr_audio_stream_info".proc_end_time),
+        stream_duration = COALESCE(update_audio_stream_info.stream_duration, public."asr_audio_stream_info".stream_duration)
+WHERE public."asr_audio_stream_info".session_id = update_audio_stream_info.session_id
+    AND public."asr_audio_stream_info".seq_id = update_audio_stream_info.seq_id;
 $$;

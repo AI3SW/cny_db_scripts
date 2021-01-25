@@ -40,3 +40,12 @@ root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f a
 ```bash
 $ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/seed_mock_data.sql
 ```
+
+## TODO
+
+* only upsert_device device or session in `insert_audio_stream_prediction` or `insert_audio_stream_info`, not both
+
+```sql
+CALL public.upsert_device(device_id);
+CALL public.upsert_session(session_id, device_id);
+```

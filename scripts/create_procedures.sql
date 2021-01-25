@@ -1,3 +1,26 @@
+CREATE OR REPLACE PROCEDURE upsert_device(
+    device_id VARCHAR
+)
+LANGUAGE SQL
+AS $$
+    INSERT INTO public."device" (device_id)
+    VALUES (device_id)
+    ON CONFLICT (device_id)
+    DO UPDATE SET last_play_time = NOW();
+$$;
+
+CREATE OR REPLACE PROCEDURE upsert_session(
+    session_id VARCHAR,
+    device_id VARCHAR
+)
+LANGUAGE SQL
+AS $$
+    INSERT INTO public."session" (session_id, device_id)
+    VALUES (session_id, device_id)
+    ON CONFLICT (session_id)
+    DO UPDATE SET session_end = NOW();
+$$;
+
 CREATE OR REPLACE PROCEDURE insert_audio_stream_prediction(
     user_id INTEGER,
     device_id VARCHAR(64),
@@ -11,6 +34,8 @@ CREATE OR REPLACE PROCEDURE insert_audio_stream_prediction(
 )
 LANGUAGE SQL 
 AS $$
+    CALL public.upsert_device(device_id);
+    CALL public.upsert_session(session_id, device_id);
     INSERT INTO
         public."asr_audio_stream_prediction" (
             user_id,
@@ -50,6 +75,8 @@ CREATE OR REPLACE PROCEDURE insert_audio_stream_info(
 )
 LANGUAGE SQL
 AS $$
+    CALL public.upsert_device(device_id);
+    CALL public.upsert_session(session_id, device_id);
     INSERT INTO
         public."asr_audio_stream_info" (
             user_id,

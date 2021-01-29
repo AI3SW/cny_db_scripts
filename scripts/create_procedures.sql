@@ -129,14 +129,14 @@ $$;
 
 
 CREATE OR REPLACE PROCEDURE update_audio_stream_info(
-    user_id INTEGER,
-    device_id VARCHAR(64),
     session_id VARCHAR,
     seq_id INTEGER,
-    app_id INTEGER,
-    proc_start_time TIMESTAMP WITH TIME ZONE,
-    proc_end_time TIMESTAMP WITH TIME ZONE,
-    stream_duration BIGINT
+    user_id INTEGER DEFAULT NULL,
+    device_id VARCHAR(64) DEFAULT NULL,
+    app_id INTEGER DEFAULT NULL,
+    proc_start_time TIMESTAMP WITH TIME ZONE DEFAULT NULL,
+    proc_end_time TIMESTAMP WITH TIME ZONE DEFAULT NULL,
+    stream_duration BIGINT DEFAULT NULL
 )
 LANGUAGE SQL
 AS $$

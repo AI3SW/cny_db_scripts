@@ -86,7 +86,6 @@ CREATE TABLE public."asr_audio_stream_prediction" (
 	seq_id INTEGER,
 	app_id INTEGER NOT NULL,
 	pred_timestamp TIMESTAMP WITH TIME ZONE NOT NULL,
-	input_audio BYTEA NOT NULL,
 	input_word VARCHAR NOT NULL,
 	return_text VARCHAR NOT NULL,
 	PRIMARY KEY (session_id, seq_id),

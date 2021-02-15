@@ -20,6 +20,7 @@ $ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/c
 $ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f scripts/create_tables.sql
 $ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/create_procedures.sql
 $ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f scripts/create_procedures.sql
+$ PGPASSWORD=password psql -U postgres -h localhost -f scripts/update_security.sql
 ```
 
 ### 2. Using interactive shell into the container

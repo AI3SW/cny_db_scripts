@@ -1,0 +1,30 @@
+-- give permission to readonly role
+GRANT CONNECT ON DATABASE :db TO readonly;
+
+GRANT USAGE ON SCHEMA public TO readonly;
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO readonly;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT
+SELECT
+    ON TABLES TO readonly;
+
+-- give permission to readwrite role
+GRANT CONNECT ON DATABASE :db TO readonly;
+
+GRANT CONNECT ON DATABASE ai_3 TO readwrite;
+
+GRANT CONNECT ON DATABASE ai_3_staging TO readwrite;
+
+GRANT USAGE ON SCHEMA public TO readwrite;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO readwrite;
+
+GRANT USAGE ON ALL SEQUENCES IN SCHEMA public TO readwrite;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT
+SELECT
+, INSERT, UPDATE, DELETE ON TABLES TO readwrite;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT USAGE ON SEQUENCES TO readwrite;
+

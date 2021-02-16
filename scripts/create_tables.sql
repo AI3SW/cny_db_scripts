@@ -113,6 +113,6 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 CREATE TABLE "playback" (
     playback_id serial PRIMARY KEY,
     "message" bytea,
-    "delay" integer
+    "delay" integer DEFAULT 0
 );
 

@@ -14,6 +14,8 @@ DROP TABLE IF EXISTS "app";
 
 DROP TABLE IF EXISTS "user";
 
+DROP TABLE IF EXISTS "playback";
+
 -- public."user" definition
 CREATE TABLE "user" (
     user_id serial NOT NULL,
@@ -113,6 +115,6 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 CREATE TABLE "playback" (
     playback_id serial PRIMARY KEY,
     "message" bytea,
-    "delay" integer
+    "delay" integer DEFAULT 0
 );
 

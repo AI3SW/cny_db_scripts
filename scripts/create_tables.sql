@@ -109,3 +109,10 @@ CREATE INDEX ix_asr_audio_stream_prediction_pred_timestamp ON asr_audio_stream_p
 -- create extension
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
+-- playback table for testing purposes
+CREATE TABLE "playback" (
+    playback_id serial PRIMARY KEY,
+    "message" bytea,
+    "delay" integer
+);
+

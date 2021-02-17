@@ -88,21 +88,25 @@ CREATE OR REPLACE FUNCTION is_user (username varchar, "password" varchar)
 $$;
 
 -- procedures for "playback" table
-CREATE OR REPLACE PROCEDURE insert_playback ("message" bytea, "delay" integer, INOUT "playback_id" integer)
-    LANGUAGE plpgsql
-    AS $$
-    BEGIN
-        INSERT INTO "playback" ("message", "delay")
-        VALUES ("message", "delay")
-        RETURNING "playback"."playback_id" INTO "playback_id";
-    END;
-    $$;
+CREATE OR REPLACE PROCEDURE insert_playback ("message" bytea, INOUT "playback_id" integer)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO "playback" ("message")
+        VALUES ("message")
+    RETURNING
+        "playback"."playback_id" INTO "playback_id";
+END;
+$$;
 
 CREATE OR REPLACE PROCEDURE update_playback ("playback_id" integer, "delay" integer)
-    LANGUAGE sql
-    AS $$
-        UPDATE "playback"
-        SET "delay" = update_playback."delay"
-        WHERE "playback"."playback_id" = update_playback."playback_id"
-    $$;
+LANGUAGE sql
+AS $$
+    UPDATE
+        "playback"
+    SET
+        "delay" = update_playback. "delay"
+    WHERE
+        "playback"."playback_id" = update_playback. "playback_id"
+$$;
 

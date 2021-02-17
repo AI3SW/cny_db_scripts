@@ -99,7 +99,7 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE PROCEDURE update_playback ("playback_id" integer, "delay" integer)
+CREATE OR REPLACE PROCEDURE update_playback ("playback_id" integer, "delay" double precision)
 LANGUAGE sql
 AS $$
     UPDATE

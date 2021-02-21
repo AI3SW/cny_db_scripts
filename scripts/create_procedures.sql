@@ -110,3 +110,19 @@ AS $$
         "playback"."playback_id" = update_playback. "playback_id"
 $$;
 
+CREATE OR REPLACE FUNCTION get_playback ()
+    RETURNS TABLE (
+        "message" bytea,
+        "delay" double precision)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    RETURN query
+    SELECT
+        playback. "message",
+        playback. "delay"
+    FROM
+        playback;
+END;
+$$
+

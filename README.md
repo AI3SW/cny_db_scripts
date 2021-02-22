@@ -32,13 +32,19 @@ root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -f ai_toolbo
 root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f ai_toolbox_db/scripts/create_tables.sql
 root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f ai_toolbox_db/scripts/create_tables.sql
 root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f ai_toolbox_db/scripts/create_procedures.sql
-root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f ai_toolbox_db/scripts/scripts/create_procedures.sql
+root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f ai_toolbox_db/scripts/create_procedures.sql
 ```
 
 ## Seed Staging Database
 
 ```bash
 $ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/seed_mock_data.sql
+```
+
+## Seed Playback Table for Testing purposes
+
+```bash
+$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/seed_playback_table.sql
 ```
 
 ## TODO

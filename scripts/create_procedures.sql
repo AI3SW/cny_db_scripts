@@ -87,3 +87,42 @@ CREATE OR REPLACE FUNCTION is_user (username varchar, "password" varchar)
                 AND "user"."password" = crypt(is_user.password, "user"."password"));
 $$;
 
+-- procedures for "playback" table
+CREATE OR REPLACE PROCEDURE insert_playback ("message" bytea, INOUT "playback_id" integer)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO "playback" ("message")
+        VALUES ("message")
+    RETURNING
+        "playback"."playback_id" INTO "playback_id";
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE update_playback ("playback_id" integer, "delay" double precision)
+LANGUAGE sql
+AS $$
+    UPDATE
+        "playback"
+    SET
+        "delay" = update_playback. "delay"
+    WHERE
+        "playback"."playback_id" = update_playback. "playback_id"
+$$;
+
+CREATE OR REPLACE FUNCTION get_playback ()
+    RETURNS TABLE (
+        "message" bytea,
+        "delay" double precision)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    RETURN query
+    SELECT
+        playback. "message",
+        playback. "delay"
+    FROM
+        playback;
+END;
+$$
+

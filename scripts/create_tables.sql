@@ -14,6 +14,8 @@ DROP TABLE IF EXISTS "app";
 
 DROP TABLE IF EXISTS "user";
 
+DROP TABLE IF EXISTS "playback";
+
 -- public."user" definition
 CREATE TABLE "user" (
     user_id serial NOT NULL,
@@ -108,4 +110,11 @@ CREATE INDEX ix_asr_audio_stream_prediction_pred_timestamp ON asr_audio_stream_p
 
 -- create extension
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- playback table for testing purposes
+CREATE TABLE "playback" (
+    playback_id serial PRIMARY KEY,
+    "message" bytea,
+    "delay" double precision DEFAULT -1
+);
 

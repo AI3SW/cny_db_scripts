@@ -121,6 +121,7 @@ $$;
 
 CREATE OR REPLACE FUNCTION get_playback ()
     RETURNS TABLE (
+        "playback_id" int,
         "message" bytea,
         "delay" double precision)
     LANGUAGE plpgsql
@@ -128,15 +129,19 @@ CREATE OR REPLACE FUNCTION get_playback ()
 BEGIN
     RETURN query
     SELECT
+        playback. "playback_id",
         playback. "message",
         playback. "delay"
     FROM
-        playback;
+        playback
+    ORDER BY
+        playback. "playback_id" ASC;
 END;
 $$;
 
 CREATE OR REPLACE FUNCTION get_playback ("session_id" varchar)
     RETURNS TABLE (
+        "playback_id" int,
         "message" bytea,
         "delay" double precision)
     LANGUAGE plpgsql
@@ -144,12 +149,15 @@ CREATE OR REPLACE FUNCTION get_playback ("session_id" varchar)
 BEGIN
     RETURN query
     SELECT
+        playback. "playback_id",
         playback. "message",
         playback. "delay"
     FROM
         playback
     WHERE
-        get_playback. "session_id" = playback. "session_id";
+        get_playback. "session_id" = playback. "session_id"
+    ORDER BY
+        playback. "playback_id" ASC;
 END;
 $$;
 

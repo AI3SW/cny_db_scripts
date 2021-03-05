@@ -114,7 +114,7 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- playback table for testing purposes
 CREATE TABLE "playback" (
     playback_id serial PRIMARY KEY,
-    session_id varchar(100),
+    session_id varchar(100) DEFAULT 'simple_playback',
     "message" bytea,
     "delay" double precision DEFAULT -1,
     FOREIGN KEY (session_id) REFERENCES session (session_id) ON UPDATE CASCADE

@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS "asr_audio_stream_prediction";
 
 DROP TABLE IF EXISTS "asr_audio_stream_info";
 
+DROP TABLE IF EXISTS "playback";
+
 DROP TABLE IF EXISTS "session";
 
 DROP TABLE IF EXISTS "device";
@@ -13,8 +15,6 @@ DROP TABLE IF EXISTS "device";
 DROP TABLE IF EXISTS "app";
 
 DROP TABLE IF EXISTS "user";
-
-DROP TABLE IF EXISTS "playback";
 
 -- public."user" definition
 CREATE TABLE "user" (
@@ -114,7 +114,9 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- playback table for testing purposes
 CREATE TABLE "playback" (
     playback_id serial PRIMARY KEY,
+    session_id varchar(100) DEFAULT 'simple_playback',
     "message" bytea,
-    "delay" double precision DEFAULT -1
+    "delay" double precision DEFAULT -1,
+    FOREIGN KEY (session_id) REFERENCES session (session_id) ON UPDATE CASCADE
 );
 

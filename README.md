@@ -44,7 +44,11 @@ $ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/s
 ## Seed Playback Table for Testing purposes
 
 ```bash
-$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/seed_playback_table.sql
+$ # Simple Test
+$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/seed_simple_playback.sql
+
+$ # Mock Game Session
+$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f scripts/seed_mock_session_playback.sql
 ```
 
 ## TODO

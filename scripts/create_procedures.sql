@@ -88,14 +88,23 @@ CREATE OR REPLACE FUNCTION is_user (username varchar, "password" varchar)
 $$;
 
 -- procedures for "playback" table
-CREATE OR REPLACE PROCEDURE insert_playback ("message" bytea, INOUT "playback_id" integer)
+CREATE OR REPLACE PROCEDURE insert_playback ("message" bytea, "session_id" varchar, INOUT "playback_id" integer)
 LANGUAGE plpgsql
 AS $$
 BEGIN
-    INSERT INTO "playback" ("message")
-        VALUES ("message")
+    INSERT INTO "playback" ("message", "session_id")
+        VALUES (insert_playback. "message", insert_playback. "session_id")
     RETURNING
         "playback"."playback_id" INTO "playback_id";
+END;
+$$;
+
+CREATE OR REPLACE PROCEDURE insert_playback ("message" bytea, "session_id" varchar)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO "playback" ("message", "session_id")
+        VALUES (insert_playback. "message", insert_playback. "session_id");
 END;
 $$;
 
@@ -112,6 +121,7 @@ $$;
 
 CREATE OR REPLACE FUNCTION get_playback ()
     RETURNS TABLE (
+        "playback_id" int,
         "message" bytea,
         "delay" double precision)
     LANGUAGE plpgsql
@@ -119,10 +129,35 @@ CREATE OR REPLACE FUNCTION get_playback ()
 BEGIN
     RETURN query
     SELECT
+        playback. "playback_id",
         playback. "message",
         playback. "delay"
     FROM
-        playback;
+        playback
+    ORDER BY
+        playback. "playback_id" ASC;
 END;
-$$
+$$;
+
+CREATE OR REPLACE FUNCTION get_playback ("session_id" varchar)
+    RETURNS TABLE (
+        "playback_id" int,
+        "message" bytea,
+        "delay" double precision)
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    RETURN query
+    SELECT
+        playback. "playback_id",
+        playback. "message",
+        playback. "delay"
+    FROM
+        playback
+    WHERE
+        get_playback. "session_id" = playback. "session_id"
+    ORDER BY
+        playback. "playback_id" ASC;
+END;
+$$;
 

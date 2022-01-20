@@ -1,4 +1,6 @@
-# AI Toolbox Database
+# CNY DB Scripts
+
+Scripts to create and setup database for CNY project.
 
 ## Run PostgreSQL using Docker
 
@@ -27,12 +29,12 @@ $ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f scripts/create_pr
 ```bash
 $ docker exec -it postgres /bin/bash
 root@container:/$ apt-get update && apt-get install git
-root@container:/$ git clone https://github.com/kw01sg/ai_toolbox_db.git
-root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -f ai_toolbox_db/scripts/create_db.sql
-root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f ai_toolbox_db/scripts/create_tables.sql
-root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f ai_toolbox_db/scripts/create_tables.sql
-root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f ai_toolbox_db/scripts/create_procedures.sql
-root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f ai_toolbox_db/scripts/create_procedures.sql
+root@container:/$ git clone git@github.com:AI3SW/cny_db_scripts.git
+root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -f cny_db_scripts/scripts/create_db.sql
+root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f cny_db_scripts/scripts/create_tables.sql
+root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f cny_db_scripts/scripts/create_tables.sql
+root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3_staging -f cny_db_scripts/scripts/create_procedures.sql
+root@container:/$ PGPASSWORD=password psql -U postgres -h localhost -d ai_3 -f cny_db_scripts/scripts/create_procedures.sql
 ```
 
 ## Seed Staging Database
